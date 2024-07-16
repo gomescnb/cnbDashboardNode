@@ -44,6 +44,7 @@ app.get("/proxy", async (req, res) => {
 });
 
 app.get("/table/:dado", async (req, res) => {
+  try {
   const dado = req.params.dado;
   const tableResponse = await axios.get(`https://portalbrasil.net/${dado}`);
   console.log(tableResponse.data);
@@ -76,6 +77,11 @@ app.get("/table/:dado", async (req, res) => {
       return res.send(tableFinal);
     default:
       return res.status(404).send("Rota não encontrada");
+  }
+
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    res.status(500).send("Error fetching data", error);
   }
 });
 
