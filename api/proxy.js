@@ -46,17 +46,23 @@ app.get("/proxy", async (req, res) => {
 app.get("/table/:dado", async (req, res) => {
   const dado = req.params.dado;
   const tableResponse = await axios.get(`https://portalbrasil.net/${dado}`);
+  console.log(tableResponse.data);
   console.log(dado);
   let startIndex = "";
   let tableParcial = "";
   let endIndex = "";
   let tableFinal = "";
   switch (dado) {
-    case "igpm" || "ipca":
+    case "ipca":
       startIndex = tableResponse.data.indexOf("<table");
       endIndex = tableResponse.data.indexOf("</table>");
       tableFinal = tableResponse.data.substring(startIndex, endIndex + 8); // 8 is the length of "</table>" in the original
       return res.send(tableFinal);
+    case "igpm":
+      startIndex = tableResponse.data.indexOf("<table");
+      endIndex = tableResponse.data.indexOf("</table>");
+      tableFinal = tableResponse.data.substring(startIndex, endIndex + 8); // 8 is the length of "</table>" in the original
+      return res.send(tableFinal);    
     case "inpc":
       startIndex = tableResponse.data.indexOf(
         '<table id="tb" cellspacing="1" cellpadding="3">'
@@ -69,7 +75,7 @@ app.get("/table/:dado", async (req, res) => {
       tableFinal = tableParcial.substring(0, endIndex + 8); // 8 is the length of "</table>" in the original
       return res.send(tableFinal);
     default:
-      return res.status(404).send("Tabela não encontrada");
+      return res.status(404).send("Rota não encontrada");
   }
 });
 
