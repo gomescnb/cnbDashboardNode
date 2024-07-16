@@ -60,7 +60,8 @@ app.get("/table/:dado", async (req, res) => {
       endIndex = tableResponse.data.indexOf("</table>");
       tableFinal = tableResponse.data.substring(startIndex, endIndex + 8); // 8 is the length of "</table>" in the original
       console.log("if ipca");
-      return res.send(tableFinal);
+      return res.send("opa ramon response");
+
     case "igpm":
       startIndex = tableResponse.data.indexOf("<table");
       endIndex = tableResponse.data.indexOf("</table>");
