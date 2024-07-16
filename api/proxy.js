@@ -46,6 +46,7 @@ app.get("/proxy", async (req, res) => {
 app.get("/table/:dado", async (req, res) => {
   try {
   const dado = req.params.dado;
+  console.log(dado + "antes")
   const tableResponse = await axios.get(`https://portalbrasil.net/${dado}`);
   console.log(tableResponse.data);
   console.log(dado);
