@@ -48,7 +48,7 @@ app.get("/table/:dado", async (req, res) => {
   const dado = req.params.dado;
   console.log(dado + "antes")
   const tableResponse = await axios.get(`https://portalbrasil.net/${dado}`);
-  console.log(tableResponse.data);
+  console.log("apos table response");
   console.log(dado);
   let startIndex = "";
   let tableParcial = "";
@@ -59,7 +59,7 @@ app.get("/table/:dado", async (req, res) => {
       startIndex = tableResponse.data.indexOf("<table");
       endIndex = tableResponse.data.indexOf("</table>");
       tableFinal = tableResponse.data.substring(startIndex, endIndex + 8); // 8 is the length of "</table>" in the original
-      console.log(tableFinal);
+      console.log("if ipca");
       return res.send(tableFinal);
     case "igpm":
       startIndex = tableResponse.data.indexOf("<table");
