@@ -1,5 +1,5 @@
 {
   "version": 2,
   "builds": [{ "src": "api/proxy.js", "use": "@vercel/node" }],
-  "routes": [{ "src": "(.*)", "dest": "/api/proxy.js" }]
+  "routes": [{ "src": "(/proxy)", "dest": "/api/proxy.js" },{"src":"(/table/.*)","dest":"/api/tables.js"}]
 }
